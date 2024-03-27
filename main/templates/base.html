@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titolo_pagina %}Gestione Medici ASL Todi{% endblock titolo_pagina %}</title>
+    <!-- BootStrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    {% block style_link %}{% endblock style_link %}
+        <!-- Mio CSS -->
+        <style>
+            {% block css_pagina %}{% endblock css_pagina %}
+        </style>
+</head>
+
+<body>
+    <!--Menu-->
+    <nav class="navbar navbar-expand-lg bg-primary text-bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">ASL Todi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url "index" %}">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Medici
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="nav-link" href="{% url "medici" %}">Lista Medici</a></li>
+                          <li><a class="nav-link" href="{% url "newMedico" %}">Nuovo Medico</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="nav-link" href="{% url "pazienti" %}">Lista Pazienti</a></li>
+                          <li><a class="nav-link" href="{% url "newPaziente" %}">Nuovo Paziente</a></li>
+                        </ul>
+                      </li>
+                                   
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Blog
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="nav-link" href="{% url "blog" %}">Lista Blog</a></li>
+                          <li><a class="nav-link" href="{% url "newBlog" %}">Nuovo Blog</a></li>
+                        </ul>
+                      </li>
+
+                      <!--Mostro login non sei loggato altrimenti ti mostro il logout-->
+                      {% if request.user.is_authenticated %}
+                      <li class="nav-item">
+                        Ciao {{ request.user.username }} - <a class="nav-link active" aria-current="page" href="{% url "logout" %}">LogOut</a>
+                      </li>
+                      {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url "login" %}">Login</a>/<a class="nav-link active" aria-current="page" href="{% url "register" %}">Registrati</a>
+                    </li>
+                      {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--Fine Menu-->
+    <div class="container">
+        {% block contenuto %}{% endblock contenuto %}
+    </div>
+    <!-- JS BootStrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

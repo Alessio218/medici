@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titolo_pagina %}Pazienti - ASL Todi{% endblock titolo_pagina %}
+
+
+{% block contenuto %}
+<table class="table table-hover">
+<thead>
+    <tr>
+        <th>Cognome</th>
+        <th>Nome</th>
+        <th>Luogo di Nascita</th>
+        <th>Data di Nascita</th>
+        <th>Residenza</th>
+        <th>Indirizzo</th>
+        <th>Medico Curante</th>
+        <th>Data Nascita Medico</th>
+    </tr>
+</thead>
+<tbody>
+{% for p in pazienti  %}
+<tr>
+    <td>{{p.cognome}}</td>
+    <td>{{p.nome}}</td> 
+    <td>{{p.luogo_nascita}}</td>
+    <td>{{p.data_nascita}}</td>
+    <td>{{p.residenza}}</td>
+    <td>{{p.indirizzo}}</td>
+    <td><a href="{% url "lista_pazienti" p.medico.pk %}">{{p.medico}}</a></td>
+    <td>{{p.medico.data_nascita}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% include "pagination.html" with page=pazienti %}
+{% endblock contenuto %}

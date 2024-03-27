@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block titolo_pagina %}{{ blog.titolo }}{% endblock titolo_pagina %}
+{% block contenuto %}
+<h1>{{blog.titolo}}</h1>
+<p>
+    <img src="{{ blog.img_blog.url }}" width="250">
+</p>
+<p>{{ blog.data}}</p>
+<p>{{ blog.corpo}}</p>
+<p>Categoria: {{ blog.categoria}}</p>
+<p>Autore: {{ blog.autore}}</p>
+{% endblock contenuto %}
